@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spajam2023_pre_front/component/JoinerElement.dart';
 import 'package:spajam2023_pre_front/component/SpotElement.dart';
+import 'package:spajam2023_pre_front/pages/SpotList.dart';
 
 /////////////// ホームページ ///////////////
 class HomePage extends StatefulWidget {
@@ -100,7 +101,16 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          // TODO: DBに反映
+
+          // 最初のスポットを選択する画面へ遷移
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) {
+              return SpotListPage();
+            }),
+          );
+        },
         icon: new Icon(
           Icons.add,
           color: Colors.white,
