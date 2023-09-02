@@ -45,39 +45,45 @@ class _HomePageState extends State<HomePage> {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(children: [
-              SubTitleElement(title: '行きたいスポット'),
-              SpotList(),
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
-                child: TextButton(
+              Stack(children: [
+                TextButton(
                   onPressed: () {
                     // ボタンが押されたときに発動される処理
                   },
-                  child: Text('追加＋',
-                      style: TextStyle(
-                        fontSize: 19,
-                      )),
+                  child: Container(
+                    width: double.infinity,
+                    child: Text('追加＋',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          fontSize: 19,
+                        )),
+                  ),
                 ),
-              )
+                SubTitleElement(title: '行きたいスポット'),
+              ]),
+              SpotList(),
             ]),
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(children: [
-              SubTitleElement(title: '参加メンバー'),
-              JoinerList(),
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
-                child: TextButton(
+              Stack(children: [
+                TextButton(
                   onPressed: () {
                     // ボタンが押されたときに発動される処理
                   },
-                  child: Text('追加＋',
-                      style: TextStyle(
-                        fontSize: 19,
-                      )),
+                  child: Container(
+                    width: double.infinity,
+                    child: Text('追加＋',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          fontSize: 19,
+                        )),
+                  ),
                 ),
-              )
+                SubTitleElement(title: '参加メンバー'),
+              ]),
+              JoinerList(),
             ]),
           )
         ]),
