@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:spajam2023_pre_front/component/JoinerElement.dart';
 import 'package:spajam2023_pre_front/component/SpotElement.dart';
+import 'package:spajam2023_pre_front/component/SubTitleElement.dart';
+import 'package:spajam2023_pre_front/pages/SpotList.dart';
 
 /////////////// ホームページ ///////////////
 class HomePage extends StatefulWidget {
@@ -31,13 +33,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(children: [
-              Text(
-                'タイトル',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 21,
-                ),
-              ),
+              SubTitleElement(title: 'タイトル'),
               TextField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -49,58 +45,61 @@ class _HomePageState extends State<HomePage> {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(children: [
-              const Text(
-                '行きたいスポット',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 21,
-                ),
-              ),
-              SpotList(),
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
-                child: TextButton(
+              Stack(children: [
+                TextButton(
                   onPressed: () {
                     // ボタンが押されたときに発動される処理
                   },
-                  child: Text('追加＋',
-                      style: TextStyle(
-                        fontSize: 19,
-                      )),
+                  child: Container(
+                    width: double.infinity,
+                    child: Text('追加＋',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          fontSize: 19,
+                        )),
+                  ),
                 ),
-              )
+                SubTitleElement(title: '行きたいスポット'),
+              ]),
+              SpotList(),
             ]),
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(children: [
-              const Text(
-                '参加メンバ',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 21,
-                ),
-              ),
-              JoinerList(),
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
-                child: TextButton(
+              Stack(children: [
+                TextButton(
                   onPressed: () {
                     // ボタンが押されたときに発動される処理
                   },
-                  child: Text('追加＋',
-                      style: TextStyle(
-                        fontSize: 19,
-                      )),
+                  child: Container(
+                    width: double.infinity,
+                    child: Text('追加＋',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          fontSize: 19,
+                        )),
+                  ),
                 ),
-              )
+                SubTitleElement(title: '参加メンバー'),
+              ]),
+              JoinerList(),
             ]),
           )
         ]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          // TODO: DBに反映
+
+          // 最初のスポットを選択する画面へ遷移
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) {
+              return SpotListPage();
+            }),
+          );
+        },
         icon: new Icon(
           Icons.add,
           color: Colors.white,
