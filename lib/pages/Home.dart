@@ -46,9 +46,46 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(children: [
               Stack(children: [
+                SubTitleElement(title: '行きたいスポット'),
                 TextButton(
                   onPressed: () {
                     // ボタンが押されたときに発動される処理
+                    showModalBottomSheet(
+                      //モーダルの背景の色、透過
+                      // backgroundColor: Colors,
+                      //ドラッグ可能にする（高さもハーフサイズからフルサイズになる様子）
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Container(
+                            margin: EdgeInsets.only(top: 64),
+                            decoration: BoxDecoration(
+                              //モーダル自体の色
+                              color: Colors.white,
+                              //角丸にする
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                            child: Container(
+                              margin: EdgeInsets.all(20),
+                              child: Column(
+                                children: [
+                                  SubTitleElement(title: 'お気に入りの検索'),
+                                  TextField(),
+                                  Center(
+                                    child: ElevatedButton.icon(
+                                      onPressed: () => Navigator.pop(context),
+                                      icon: Icon(Icons.close),
+                                      label: Text('決定'),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ));
+                      },
+                    );
                   },
                   child: Container(
                     width: double.infinity,
@@ -59,7 +96,6 @@ class _HomePageState extends State<HomePage> {
                         )),
                   ),
                 ),
-                SubTitleElement(title: '行きたいスポット'),
               ]),
               SpotList(),
             ]),
@@ -68,9 +104,22 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(children: [
               Stack(children: [
+                SubTitleElement(title: '参加メンバー'),
                 TextButton(
                   onPressed: () {
                     // ボタンが押されたときに発動される処理
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return Center(
+                          child: ElevatedButton.icon(
+                            onPressed: () => Navigator.pop(context),
+                            icon: Icon(Icons.close),
+                            label: Text('閉じる'),
+                          ),
+                        );
+                      },
+                    );
                   },
                   child: Container(
                     width: double.infinity,
@@ -81,7 +130,6 @@ class _HomePageState extends State<HomePage> {
                         )),
                   ),
                 ),
-                SubTitleElement(title: '参加メンバー'),
               ]),
               JoinerList(),
             ]),
