@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spajam2023_pre_front/component/JoinerElement.dart';
 import 'package:spajam2023_pre_front/component/SpotElement.dart';
+import 'package:spajam2023_pre_front/component/SubTitleElement.dart';
 import 'package:spajam2023_pre_front/pages/SpotList.dart';
 
 /////////////// ホームページ ///////////////
@@ -32,13 +33,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(children: [
-              Text(
-                'タイトル',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 21,
-                ),
-              ),
+              SubTitleElement(title: 'タイトル'),
               TextField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -50,13 +45,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(children: [
-              const Text(
-                '行きたいスポット',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 21,
-                ),
-              ),
+              SubTitleElement(title: '行きたいスポット'),
               SpotList(),
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
@@ -75,13 +64,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(children: [
-              const Text(
-                '参加メンバ',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 21,
-                ),
-              ),
+              SubTitleElement(title: '参加メンバー'),
               JoinerList(),
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
