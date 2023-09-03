@@ -5,16 +5,18 @@ class SpotElement extends StatefulWidget {
   String way;
   String wait;
   String move;
+  String image;
   SpotElement(
       {super.key,
       required this.title,
       required this.way,
       required this.wait,
-      required this.move});
+      required this.move,
+      required this.image});
 
   @override
   State<SpotElement> createState() =>
-      _SpotElementState(this.title, this.way, this.wait, this.move);
+      _SpotElementState(this.title, this.way, this.wait, this.move, this.image);
 }
 
 class _SpotElementState extends State<SpotElement> {
@@ -22,8 +24,9 @@ class _SpotElementState extends State<SpotElement> {
   String way;
   String wait;
   String move;
+  String image;
 
-  _SpotElementState(this.title, this.way, this.wait, this.move);
+  _SpotElementState(this.title, this.way, this.wait, this.move, this.image);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,8 @@ class _SpotElementState extends State<SpotElement> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(9.0),
             child: Image.network(
-              'https://lh3.googleusercontent.com/ogw/AGvuzYbm8SoY0xm5bSLJDyRIEtYJDMFPjU-tVMsOxDCpmg=s64-c-mo',
+              image,
+              // 'https://lh3.googleusercontent.com/ogw/AGvuzYbm8SoY0xm5bSLJDyRIEtYJDMFPjU-tVMsOxDCpmg=s64-c-mo',
               fit: BoxFit.contain,
             ),
           ),
@@ -49,7 +53,7 @@ class _SpotElementState extends State<SpotElement> {
                 title,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 18,
                 ),
               ),
               Text(way),
