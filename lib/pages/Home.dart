@@ -56,6 +56,7 @@ class _HomePageState extends State<HomePage> {
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           fontSize: 19,
+                          color: Color.fromRGBO(94, 92, 222, 1),
                         )),
                   ),
                 ),
@@ -78,6 +79,7 @@ class _HomePageState extends State<HomePage> {
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           fontSize: 19,
+                          color: Color.fromRGBO(94, 92, 222, 1),
                         )),
                   ),
                 ),
@@ -112,7 +114,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 0, 113, 139),
+        backgroundColor: Color.fromRGBO(94, 92, 222, 1),
       ),
     );
   }

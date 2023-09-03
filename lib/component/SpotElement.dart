@@ -59,7 +59,7 @@ class _SpotElementState extends State<SpotElement> {
               ),
               Row(
                 children: [
-                  Text('待ち'),
+                  Text('移動'),
                   Text(
                     '25分',
                     style: TextStyle(

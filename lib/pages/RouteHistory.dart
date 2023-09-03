@@ -142,7 +142,7 @@ class _RouteHistoryPageState extends State<RouteHistoryPage> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 0, 113, 139),
+        backgroundColor: Color.fromRGBO(94, 92, 222, 1),
       ),
     );
   }
