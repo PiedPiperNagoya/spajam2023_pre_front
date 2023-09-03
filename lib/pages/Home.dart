@@ -4,6 +4,7 @@ import 'package:spajam2023_pre_front/component/SpotElement.dart';
 import 'package:spajam2023_pre_front/component/SubTitleElement.dart';
 import 'package:spajam2023_pre_front/pages/SpotList.dart';
 import 'package:spajam2023_pre_front/component/FavoriteElement.dart';
+import 'package:spajam2023_pre_front/component/AddJoinerElement.dart';
 
 /////////////// ホームページ ///////////////
 class HomePage extends StatefulWidget {
@@ -49,9 +50,9 @@ class _HomePageState extends State<HomePage> {
               Stack(children: [
                 SubTitleElement(title: '行きたいスポット'),
                 TextButton(
-                  onPressed: () {
+                  onPressed: () async {
                     // ボタンが押されたときに発動される処理
-                    showModalBottomSheet(
+                    var result = await showModalBottomSheet(
                       //モーダルの背景の色、透過
                       // backgroundColor: Colors,
                       //ドラッグ可能にする（高さもハーフサイズからフルサイズになる様子）
@@ -61,6 +62,7 @@ class _HomePageState extends State<HomePage> {
                         return FavoriteModal();
                       },
                     );
+                    print(result);
                   },
                   child: Container(
                     width: double.infinity,
@@ -141,13 +143,32 @@ class SpotList extends StatefulWidget {
 }
 
 class _SpotListState extends State<SpotList> {
+  var favorite_list = [
+    {
+      "spot": "東京タワー",
+      "way": "東京タワー方面",
+      "wait": "25",
+      "move": "25",
+    },
+    {
+      "spot": "歌舞伎座",
+      "way": "新宿方面",
+      "wait": "10",
+      "move": "10",
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     final List<Widget> _SpotListWidgets = <Widget>[];
-    for (String num in ["1", "2"]) {
+    for (var info in favorite_list) {
       _SpotListWidgets.add(Container(
         margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-        child: SpotElement(),
+        child: SpotElement(
+          title: info["spot"] ?? "",
+          way: info["way"] ?? "",
+          wait: info["wait"] ?? "",
+          move: info["move"] ?? "",
+        ),
       ));
     }
     return SizedBox(
@@ -167,13 +188,19 @@ class JoinerList extends StatefulWidget {
 }
 
 class _JoinerListState extends State<JoinerList> {
+  var joiner_list = [
+    {"name": "たつや", "check": "true"},
+    {"name": "りしゅん", "check": "true"},
+  ];
   @override
   Widget build(BuildContext context) {
     final List<Widget> _JoinerListWidgets = <Widget>[];
-    for (String num in ["1", "2"]) {
+    for (var info in joiner_list) {
       _JoinerListWidgets.add(Container(
         margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-        child: JoinerElement(),
+        child: JoinerElement(
+          name: info["name"] ?? "",
+        ),
       ));
     }
     return SizedBox(
@@ -193,15 +220,41 @@ class FavoriteModal extends StatefulWidget {
 }
 
 class _FavoriteModalState extends State<FavoriteModal> {
+  var favorite_list = [
+    {
+      "spot": "月島もんじゃストリート",
+      "way": "東京都中央区月島",
+      "wait": "-",
+      "move": "60",
+      "check": "true",
+      "image_path":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREJZN_nzPFmQ5TEmmaT4hyHBDEvdaIz2baXxwF63g9DvlBr6YyvMvyXTXBB2s&s"
+    },
+    {
+      "spot": "皇居",
+      "way": "東京都千代田",
+      "wait": "-",
+      "move": "60",
+      "check": "true",
+      "image_path":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_mU4aeK6Xh5Df8HYXU-82fW9u4XBXC2L0Hq8E7xahRDlNCzRPyaOvoob2Npw&s"
+    },
+  ];
+
   //画面に描画するデータリスト作成
   @override
   Widget build(BuildContext context) {
     final List<Widget> _SpotHistoryListWidgets = <Widget>[];
-    for (String num in ["1", "2", "2", "2", "2"]) {
+    for (var info in favorite_list) {
       _SpotHistoryListWidgets.add(Container(
         margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
         child: FavoriteElement(
-          title: num,
+          title: info["spot"] ?? "",
+          way: info["way"] ?? "",
+          wait: info["wait"] ?? "",
+          move: info["move"] ?? "",
+          check: info["check"] ?? "",
+          image: info["image_path"] ?? "",
         ),
       ));
     }
@@ -220,7 +273,7 @@ class _FavoriteModalState extends State<FavoriteModal> {
           margin: EdgeInsets.all(20),
           child: Column(
             children: [
-              SubTitleElement(title: 'お気に入りの検索'),
+              SubTitleElement(title: 'お気に入りの登録'),
               // TextField(),
               Expanded(
                   child: SizedBox(
@@ -231,7 +284,7 @@ class _FavoriteModalState extends State<FavoriteModal> {
               )),
               Center(
                 child: ElevatedButton.icon(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => Navigator.of(context).pop(favorite_list),
                   icon: Icon(Icons.close),
                   label: Text('決定'),
                 ),
@@ -250,14 +303,20 @@ class AddJoinersModal extends StatefulWidget {
 }
 
 class _AddJoinersModalState extends State<AddJoinersModal> {
+  var joiner_list = [
+    {"name": "たつや", "check": "true"},
+    {"name": "りしゅん", "check": "true"},
+    {"name": "りょうが", "check": "false"},
+  ];
   @override
   Widget build(BuildContext context) {
     final List<Widget> _AddJoinersModalWidgets = <Widget>[];
-    for (String num in ["1", "2", "2", "2", "2"]) {
+    for (var info in joiner_list) {
       _AddJoinersModalWidgets.add(Container(
         margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-        child: FavoriteElement(
-          title: num,
+        child: AddJoinerElement(
+          name: info["name"] ?? "",
+          check: info["check"] ?? "",
         ),
       ));
     }

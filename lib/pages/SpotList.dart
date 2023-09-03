@@ -53,6 +53,7 @@ class _SpotListPageState extends State<SpotListPage> {
             child: Column(children: [
               SubTitleElement(title: 'オススメスポット'),
               SpotList(),
+              // JoinerList(),
             ]),
           )
         ]),
@@ -69,157 +70,173 @@ class SpotList extends StatefulWidget {
 }
 
 class _SpotListState extends State<SpotList> {
+  var favorite_list = [
+    {
+      "spot": "東京タワー",
+      "way": "東京タワー方面",
+      "wait": "25",
+      "move": "25",
+    },
+    {
+      "spot": "歌舞伎座",
+      "way": "新宿方面",
+      "wait": "10",
+      "move": "10",
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     final List<Widget> _SpotListWidgets = <Widget>[];
-    for (String num in ["1", "2"]) {
+    for (var info in favorite_list) {
       _SpotListWidgets.add(InkWell(
-          onTap: () {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return Column(
-                    children: <Widget>[
-                      AlertDialog(
-                        content: SingleChildScrollView(
-                          child: ListBody(
-                            children: <Widget>[
-                              Stack(children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Image.network(
-                                      'https://pbs.twimg.com/profile_banners/949674062187343878/1651581522/1500x500',
-                                      // width: double.infinity,
-                                      // width: 200,
-                                      height: 200,
-                                      fit: BoxFit.fill),
-                                ),
-                                Container(
-                                    padding: EdgeInsets.all(15),
-                                    width: 400,
-                                    height: 100,
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '東京タワー',
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 30,
-                                                color: Colors.white,
-                                              ),
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return Column(
+                  children: <Widget>[
+                    AlertDialog(
+                      content: SingleChildScrollView(
+                        child: ListBody(
+                          children: <Widget>[
+                            Stack(children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.network(
+                                    'https://pbs.twimg.com/profile_banners/949674062187343878/1651581522/1500x500',
+                                    // width: double.infinity,
+                                    // width: 200,
+                                    height: 200,
+                                    fit: BoxFit.fill),
+                              ),
+                              Container(
+                                  padding: EdgeInsets.all(15),
+                                  width: 400,
+                                  height: 100,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '東京タワー',
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 30,
+                                              color: Colors.white,
                                             ),
-                                          ],
-                                        ),
-                                      ],
-                                    ))
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ))
+                            ]),
+                            Container(
+                              margin: const EdgeInsets.only(top: 10),
+                              width: double.infinity,
+                              child: Column(children: [
+                                Text(
+                                  '所在地',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Color(0xff888888),
+                                  ),
+                                ),
+                                Text(
+                                  '〒105-0011 東京都港区芝公園４丁目２−８',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ]),
-                              Container(
-                                margin: const EdgeInsets.only(top: 10),
-                                width: double.infinity,
-                                child: Column(children: [
-                                  Text(
-                                    '所在地',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Color(0xff888888),
-                                    ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(top: 10),
+                              width: double.infinity,
+                              child: Column(children: [
+                                Text(
+                                  '平均待ち時間',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: Color(0xff888888),
+                                    fontSize: 16,
                                   ),
-                                  Text(
-                                    '〒105-0011 東京都港区芝公園４丁目２−８',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    ),
+                                ),
+                                Text(
+                                  '30分',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontSize: 16,
                                   ),
-                                ]),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(top: 10),
-                                width: double.infinity,
-                                child: Column(children: [
-                                  Text(
-                                    '平均待ち時間',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Color(0xff888888),
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  Text(
-                                    '30分',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ]),
-                              ),
-                            ],
-                          ),
+                                ),
+                              ]),
+                            ),
+                          ],
                         ),
-                        actions: <Widget>[
-                          Container(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                child: const Text('ここに行く'),
-                                onPressed: () {
-                                  // 次ルートの選択ページへ遷移
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (context) {
-                                      return RouteHistoryPage();
-                                    }),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    primary: Color.fromRGBO(
-                                        94, 92, 222, 1), // background
-                                    onPrimary: Colors.white, // foreground
-                                    fixedSize: Size.fromHeight(50),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5) //こちらを適用
-                                        )),
-                              )),
-                          Container(
-                              width: double.infinity,
-                              margin: const EdgeInsets.only(top: 15),
-                              child: ElevatedButton(
-                                child: const Text('キャンセル'),
-                                onPressed: () {
-                                  // ダイアログを閉じる
-                                  Navigator.pop(context);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    primary: Color(0xffdddddd), // background
-                                    onPrimary: Color(0xff222222), // foreground
-                                    fixedSize: Size.fromHeight(50),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10) //こちらを適用
-                                        )),
-                              )),
-                        ],
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20))),
-                        backgroundColor: Colors.white,
                       ),
-                    ],
-                  );
-                });
-          },
-          child: Container(
-            child: SpotElement(),
-            margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-          )));
+                      actions: <Widget>[
+                        Container(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              child: const Text('ここに行く'),
+                              onPressed: () {
+                                // 次ルートの選択ページへ遷移
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context) {
+                                    return RouteHistoryPage();
+                                  }),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color.fromRGBO(
+                                      94, 92, 222, 1), // background
+                                  onPrimary: Colors.white, // foreground
+                                  fixedSize: Size.fromHeight(50),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(5) //こちらを適用
+                                      )),
+                            )),
+                        Container(
+                            width: double.infinity,
+                            margin: const EdgeInsets.only(top: 15),
+                            child: ElevatedButton(
+                              child: const Text('キャンセル'),
+                              onPressed: () {
+                                // ダイアログを閉じる
+                                Navigator.pop(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color(0xffdddddd), // background
+                                  onPrimary: Color(0xff222222), // foreground
+                                  fixedSize: Size.fromHeight(50),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10) //こちらを適用
+                                      )),
+                            )),
+                      ],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      backgroundColor: Colors.white,
+                    ),
+                  ],
+                );
+              });
+        },
+        child: SpotElement(
+          title: info["spot"] ?? "",
+          way: info["way"] ?? "",
+          wait: info["wait"] ?? "",
+          move: info["move"] ?? "",
+        ),
+      ));
     }
     return SizedBox(
       height: 220,
@@ -244,7 +261,7 @@ class _JoinerListState extends State<JoinerList> {
     for (String num in ["1", "2"]) {
       _JoinerListWidgets.add(Container(
         margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-        child: JoinerElement(),
+        child: JoinerElement(name: num),
       ));
     }
     return SizedBox(

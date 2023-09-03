@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
 
 class SpotElement extends StatefulWidget {
-  const SpotElement({super.key});
+  String title;
+  String way;
+  String wait;
+  String move;
+  SpotElement(
+      {super.key,
+      required this.title,
+      required this.way,
+      required this.wait,
+      required this.move});
 
   @override
-  State<SpotElement> createState() => _SpotElementState();
+  State<SpotElement> createState() =>
+      _SpotElementState(this.title, this.way, this.wait, this.move);
 }
 
 class _SpotElementState extends State<SpotElement> {
+  String title;
+  String way;
+  String wait;
+  String move;
+
+  _SpotElementState(this.title, this.way, this.wait, this.move);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,13 +46,13 @@ class _SpotElementState extends State<SpotElement> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '東京タワー',
+                title,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),
               ),
-              Text('東京タワー方面'),
+              Text(way),
             ],
           ),
         ),
@@ -49,7 +66,7 @@ class _SpotElementState extends State<SpotElement> {
                 children: [
                   Text('待ち'),
                   Text(
-                    '25分',
+                    wait,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -61,7 +78,7 @@ class _SpotElementState extends State<SpotElement> {
                 children: [
                   Text('移動'),
                   Text(
-                    '25分',
+                    move,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,

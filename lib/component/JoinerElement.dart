@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 
 class JoinerElement extends StatefulWidget {
-  const JoinerElement({super.key});
+  String name;
+  JoinerElement({
+    super.key,
+    required this.name,
+  });
 
   @override
-  State<JoinerElement> createState() => _JoinerElementState();
+  State<JoinerElement> createState() => _JoinerElementState(
+        this.name,
+      );
 }
 
 class _JoinerElementState extends State<JoinerElement> {
+  String name;
+  _JoinerElementState(this.name);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +37,7 @@ class _JoinerElementState extends State<JoinerElement> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'たつや',
+                name,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
