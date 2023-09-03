@@ -87,34 +87,30 @@ class _HomePageState extends State<HomePage> {
               ]),
               JoinerList(),
             ]),
-          )
-        ]),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // TODO: DBに反映
-
-          // 最初のスポットを選択する画面へ遷移
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) {
-              return SpotListPage();
-            }),
-          );
-        },
-        icon: new Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        label: Text(
-          "旅行プランの作成",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-            color: Colors.white,
           ),
-        ),
-        backgroundColor: Color.fromRGBO(94, 92, 222, 1),
+          Container(
+              width: double.infinity,
+              child: ElevatedButton(
+                child: const Text('旅行プランの作成'),
+                onPressed: () {
+                  // TODO: DBに反映
+
+                  // 最初のスポットを選択する画面へ遷移
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) {
+                      return SpotListPage();
+                    }),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(94, 92, 222, 1), // background
+                    onPrimary: Colors.white, // foreground
+                    fixedSize: Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5) //こちらを適用
+                        )),
+              )),
+        ]),
       ),
     );
   }

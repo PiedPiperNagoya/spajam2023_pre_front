@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert' show json;
 import 'package:geolocator/geolocator.dart';
+import 'package:spajam2023_pre_front/pages/RouteHistory.dart';
 
 @JsonSerializable()
 class SpotListPage extends StatefulWidget {
@@ -106,7 +107,7 @@ class _SpotListState extends State<SpotList> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "東京タワー",
+                                              '東京タワー',
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
@@ -119,41 +120,97 @@ class _SpotListState extends State<SpotList> {
                                       ],
                                     ))
                               ]),
-                              Text(
-                                '所在地',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Color(0xff888888),
-                                ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 10),
+                                width: double.infinity,
+                                child: Column(children: [
+                                  Text(
+                                    '所在地',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Color(0xff888888),
+                                    ),
+                                  ),
+                                  Text(
+                                    '〒105-0011 東京都港区芝公園４丁目２−８',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ]),
                               ),
-                              Text(
-                                '〒105-0011 東京都港区芝公園４丁目２−８',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Text(
-                                '平均待ち時間',
-                                style: TextStyle(
-                                  color: Color(0xff888888),
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Text(
-                                '30分',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 10),
+                                width: double.infinity,
+                                child: Column(children: [
+                                  Text(
+                                    '平均待ち時間',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color: Color(0xff888888),
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Text(
+                                    '30分',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ]),
                               ),
                             ],
                           ),
                         ),
                         actions: <Widget>[
-                          // ボタン
+                          Container(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                child: const Text('ここに行く'),
+                                onPressed: () {
+                                  // 次ルートの選択ページへ遷移
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context) {
+                                      return RouteHistoryPage();
+                                    }),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    primary: Color.fromRGBO(
+                                        94, 92, 222, 1), // background
+                                    onPrimary: Colors.white, // foreground
+                                    fixedSize: Size.fromHeight(50),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5) //こちらを適用
+                                        )),
+                              )),
+                          Container(
+                              width: double.infinity,
+                              margin: const EdgeInsets.only(top: 15),
+                              child: ElevatedButton(
+                                child: const Text('キャンセル'),
+                                onPressed: () {
+                                  // ダイアログを閉じる
+                                  Navigator.pop(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    primary: Color(0xffdddddd), // background
+                                    onPrimary: Color(0xff222222), // foreground
+                                    fixedSize: Size.fromHeight(50),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10) //こちらを適用
+                                        )),
+                              )),
                         ],
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
+                        backgroundColor: Colors.white,
                       ),
                     ],
                   );
