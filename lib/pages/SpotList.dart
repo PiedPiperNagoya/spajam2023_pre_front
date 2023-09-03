@@ -72,16 +72,28 @@ class SpotList extends StatefulWidget {
 class _SpotListState extends State<SpotList> {
   var favorite_list = [
     {
-      "spot": "東京タワー",
-      "way": "東京タワー方面",
-      "wait": "25",
-      "move": "25",
+      'place_id': 'ChIJZ8PuP3CJGGARAXwWdc4PGQw',
+      'name': '月島もんじゃストリート',
+      'lat': 35.6642944,
+      'lng': 139.7824662,
+      'images':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREJZN_nzPFmQ5TEmmaT4hyHBDEvdaIz2baXxwF63g9DvlBr6YyvMvyXTXBB2s&amp;s',
+      'google_map': 'https://www.google.co.jp/maps?q=35.6642944,139.7824662',
+      'address': '日本、東京都中央区月島１丁目３−丁目',
+      'required_time': 60,
+      'plan_id': '87542db3-38da-4447-be8b-92240b54d9cb'
     },
     {
-      "spot": "歌舞伎座",
-      "way": "新宿方面",
-      "wait": "10",
-      "move": "10",
+      'place_id': 'ChIJTQbYAg2MGGARt22eNwtfGtE',
+      'name': '皇居',
+      'lat': 35.685175,
+      'lng': 139.7527995,
+      'images':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_mU4aeK6Xh5Df8HYXU-82fW9u4XBXC2L0Hq8E7xahRDlNCzRPyaOvoob2Npw&amp;s',
+      'google_map': 'https://www.google.co.jp/maps?q=35.685175,139.7527995',
+      'address': '東京都千代田区千代田１−１',
+      'required_time': 60,
+      'plan_id': '87542db3-38da-4447-be8b-92240b54d9cb'
     },
   ];
   @override
@@ -93,6 +105,13 @@ class _SpotListState extends State<SpotList> {
           showDialog(
               context: context,
               builder: (context) {
+                var text = Text(
+                  info['address']! as String,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                );
                 return Column(
                   children: <Widget>[
                     AlertDialog(
@@ -102,10 +121,8 @@ class _SpotListState extends State<SpotList> {
                             Stack(children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                    'https://pbs.twimg.com/profile_banners/949674062187343878/1651581522/1500x500',
-                                    // width: double.infinity,
-                                    // width: 200,
+                                child: Image.network(info['images'] as String,
+                                    // 'https://pbs.twimg.com/profile_banners/949674062187343878/1651581522/1500x500',
                                     height: 200,
                                     fit: BoxFit.fill),
                               ),
@@ -122,7 +139,7 @@ class _SpotListState extends State<SpotList> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            '東京タワー',
+                                            info['name']! as String,
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -147,13 +164,7 @@ class _SpotListState extends State<SpotList> {
                                     color: Color(0xff888888),
                                   ),
                                 ),
-                                Text(
-                                  '〒105-0011 東京都港区芝公園４丁目２−８',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
+                                text,
                               ]),
                             ),
                             Container(
@@ -169,7 +180,9 @@ class _SpotListState extends State<SpotList> {
                                   ),
                                 ),
                                 Text(
-                                  '30分',
+                                  info['required_time'] != null
+                                      ? '${info['required_time'].toString()}分'
+                                      : '0分',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontSize: 16,
@@ -231,10 +244,11 @@ class _SpotListState extends State<SpotList> {
               });
         },
         child: SpotElement(
-          title: info["spot"] ?? "",
-          way: info["way"] ?? "",
-          wait: info["wait"] ?? "",
-          move: info["move"] ?? "",
+          title: info['name']! as String,
+          way: info['required_time'].toString(),
+          wait: info['required_time'].toString(),
+          move: info['required_time'].toString(),
+          image: info['images'] as String,
         ),
       ));
     }
