@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spajam2023_pre_front/component/SpotHistoryElement.dart';
 import 'package:spajam2023_pre_front/component/SubTitleElement.dart';
+import 'package:spajam2023_pre_front/pages/SpotList.dart';
 
 /////////////// 旅行履歴ページ ///////////////
 class RouteHistoryPage extends StatefulWidget {
@@ -129,20 +130,27 @@ class _RouteHistoryPageState extends State<RouteHistoryPage> {
               SpotHistoryList()
             ]),
           ),
+          Container(
+              width: double.infinity,
+              child: ElevatedButton(
+                child: const Text('次の行き先を探す'),
+                onPressed: () {
+                  // ルート選択ページへ遷移
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) {
+                      return SpotListPage();
+                    }),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(94, 92, 222, 1), // background
+                    onPrimary: Colors.white, // foreground
+                    fixedSize: Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5) //こちらを適用
+                        )),
+              )),
         ]),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        label: Text(
-          "次の行き先を探す",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: Color.fromARGB(255, 0, 113, 139),
       ),
     );
   }
