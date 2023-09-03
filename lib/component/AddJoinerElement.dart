@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 
-class JoinerElement extends StatefulWidget {
-  const JoinerElement({super.key});
+class AddJoinerElement extends StatefulWidget {
+  String name;
+  String check;
+  AddJoinerElement({
+    super.key,
+    required this.name,
+    required this.check,
+  });
 
   @override
-  State<JoinerElement> createState() => _JoinerElementState();
+  State<AddJoinerElement> createState() =>
+      _AddJoinerElementState(this.name, this.check);
 }
 
-class _JoinerElementState extends State<JoinerElement> {
-  bool _active = false;
+class _AddJoinerElementState extends State<AddJoinerElement> {
+  String name;
+  String check;
+  _AddJoinerElementState(this.name, this.check);
+
+  late bool _active = (check == "true") ? true : false;
 
   void _changeSwitch(bool e) => setState(() => _active = e);
   @override
@@ -32,7 +43,7 @@ class _JoinerElementState extends State<JoinerElement> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'たつや',
+                name,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,

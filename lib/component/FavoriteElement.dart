@@ -2,18 +2,37 @@ import 'package:flutter/material.dart';
 
 class FavoriteElement extends StatefulWidget {
   String title;
-  FavoriteElement({super.key, required this.title});
+  String way;
+  String wait;
+  String move;
+  String check;
+  String image;
+  FavoriteElement(
+      {super.key,
+      required this.title,
+      required this.way,
+      required this.wait,
+      required this.move,
+      required this.check,
+      required this.image});
 
   @override
-  State<FavoriteElement> createState() => _FavoriteElementState(this.title);
+  State<FavoriteElement> createState() => _FavoriteElementState(
+      this.title, this.way, this.wait, this.move, this.check, this.image);
 }
 
 class _FavoriteElementState extends State<FavoriteElement> {
   String title;
+  String way;
+  String wait;
+  String move;
+  String check;
+  String image;
 
-  _FavoriteElementState(this.title);
+  _FavoriteElementState(
+      this.title, this.way, this.wait, this.move, this.check, this.image);
 
-  bool _active = false;
+  late bool _active = (check == "true") ? true : false;
 
   void _changeSwitch(bool e) => setState(() => _active = e);
 
@@ -38,13 +57,13 @@ class _FavoriteElementState extends State<FavoriteElement> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '東京タワー',
+                title,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),
               ),
-              Text('東京タワー方面'),
+              Text(way),
             ],
           ),
         ),

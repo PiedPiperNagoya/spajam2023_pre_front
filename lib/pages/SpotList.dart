@@ -46,7 +46,7 @@ class _SpotListPageState extends State<SpotListPage> {
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(children: [
               SubTitleElement(title: 'オススメスポット'),
-              JoinerList(),
+              // JoinerList(),
             ]),
           )
         ]),
@@ -63,13 +63,32 @@ class SpotList extends StatefulWidget {
 }
 
 class _SpotListState extends State<SpotList> {
+  var favorite_list = [
+    {
+      "spot": "東京タワー",
+      "way": "東京タワー方面",
+      "wait": "25",
+      "move": "25",
+    },
+    {
+      "spot": "歌舞伎座",
+      "way": "新宿方面",
+      "wait": "10",
+      "move": "10",
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     final List<Widget> _SpotListWidgets = <Widget>[];
-    for (String num in ["1", "2"]) {
+    for (var info in favorite_list) {
       _SpotListWidgets.add(Container(
         margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-        child: SpotElement(),
+        child: SpotElement(
+          title: info["spot"] ?? "",
+          way: info["way"] ?? "",
+          wait: info["wait"] ?? "",
+          move: info["move"] ?? "",
+        ),
       ));
     }
     return SizedBox(
@@ -95,7 +114,7 @@ class _JoinerListState extends State<JoinerList> {
     for (String num in ["1", "2"]) {
       _JoinerListWidgets.add(Container(
         margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-        child: JoinerElement(),
+        child: JoinerElement(name: num),
       ));
     }
     return SizedBox(
