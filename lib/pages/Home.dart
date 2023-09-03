@@ -3,6 +3,7 @@ import 'package:spajam2023_pre_front/component/JoinerElement.dart';
 import 'package:spajam2023_pre_front/component/SpotElement.dart';
 import 'package:spajam2023_pre_front/component/SubTitleElement.dart';
 import 'package:spajam2023_pre_front/pages/SpotList.dart';
+import 'package:spajam2023_pre_front/component/FavoriteElement.dart';
 
 /////////////// ホームページ ///////////////
 class HomePage extends StatefulWidget {
@@ -46,9 +47,20 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(children: [
               Stack(children: [
+                SubTitleElement(title: '行きたいスポット'),
                 TextButton(
                   onPressed: () {
                     // ボタンが押されたときに発動される処理
+                    showModalBottomSheet(
+                      //モーダルの背景の色、透過
+                      // backgroundColor: Colors,
+                      //ドラッグ可能にする（高さもハーフサイズからフルサイズになる様子）
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return FavoriteModal();
+                      },
+                    );
                   },
                   child: Container(
                     width: double.infinity,
@@ -60,7 +72,6 @@ class _HomePageState extends State<HomePage> {
                         )),
                   ),
                 ),
-                SubTitleElement(title: '行きたいスポット'),
               ]),
               SpotList(),
             ]),
@@ -69,9 +80,16 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: Column(children: [
               Stack(children: [
+                SubTitleElement(title: '参加メンバー'),
                 TextButton(
                   onPressed: () {
                     // ボタンが押されたときに発動される処理
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return AddJoinersModal();
+                      },
+                    );
                   },
                   child: Container(
                     width: double.infinity,
@@ -83,7 +101,6 @@ class _HomePageState extends State<HomePage> {
                         )),
                   ),
                 ),
-                SubTitleElement(title: '参加メンバー'),
               ]),
               JoinerList(),
             ]),
@@ -165,5 +182,108 @@ class _JoinerListState extends State<JoinerList> {
         children: _JoinerListWidgets,
       ),
     );
+  }
+}
+
+class FavoriteModal extends StatefulWidget {
+  const FavoriteModal({super.key});
+
+  @override
+  State<FavoriteModal> createState() => _FavoriteModalState();
+}
+
+class _FavoriteModalState extends State<FavoriteModal> {
+  //画面に描画するデータリスト作成
+  @override
+  Widget build(BuildContext context) {
+    final List<Widget> _SpotHistoryListWidgets = <Widget>[];
+    for (String num in ["1", "2", "2", "2", "2"]) {
+      _SpotHistoryListWidgets.add(Container(
+        margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+        child: FavoriteElement(
+          title: num,
+        ),
+      ));
+    }
+    return Container(
+        margin: EdgeInsets.only(top: 64),
+        decoration: BoxDecoration(
+          //モーダル自体の色
+          color: Colors.white,
+          //角丸にする
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: Container(
+          margin: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              SubTitleElement(title: 'お気に入りの検索'),
+              // TextField(),
+              Expanded(
+                  child: SizedBox(
+                height: 500,
+                child: ListView(
+                  children: _SpotHistoryListWidgets,
+                ),
+              )),
+              Center(
+                child: ElevatedButton.icon(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(Icons.close),
+                  label: Text('決定'),
+                ),
+              )
+            ],
+          ),
+        ));
+  }
+}
+
+class AddJoinersModal extends StatefulWidget {
+  const AddJoinersModal({super.key});
+
+  @override
+  State<AddJoinersModal> createState() => _AddJoinersModalState();
+}
+
+class _AddJoinersModalState extends State<AddJoinersModal> {
+  @override
+  Widget build(BuildContext context) {
+    final List<Widget> _AddJoinersModalWidgets = <Widget>[];
+    for (String num in ["1", "2", "2", "2", "2"]) {
+      _AddJoinersModalWidgets.add(Container(
+        margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+        child: FavoriteElement(
+          title: num,
+        ),
+      ));
+    }
+    return Container(
+        child: Container(
+      margin: EdgeInsets.all(20),
+      child: Column(
+        children: [
+          SubTitleElement(title: '参加メンバー'),
+          // TextField(),
+          Expanded(
+              child: SizedBox(
+            height: 500,
+            child: ListView(
+              children: _AddJoinersModalWidgets,
+            ),
+          )),
+          Center(
+            child: ElevatedButton.icon(
+              onPressed: () => Navigator.pop(context),
+              icon: Icon(Icons.close),
+              label: Text('決定'),
+            ),
+          )
+        ],
+      ),
+    ));
   }
 }
